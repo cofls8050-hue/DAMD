@@ -178,11 +178,12 @@
     { gif: "https://artmugfile5.cafe24.com/image/up_img/detail/4/goods_44194/17785126260.gif", thumb: "https://artmugfile5.cafe24.com/image/up_img/detail/4/goods_44194/17785126260.gif", caption: "72" }
   ];
 
-  // 주소 뒤 ?start=1&end=12 로 보여줄 구간을 정합니다. 없으면 전체를 보여줍니다.
+  // 주소 뒤 ?start=1&end=12 로 보여줄 구간을 정합니다. 없으면 전체를 보여줍니다. true면 캡션 보임, false면 캡션 숨김
   var params = new URLSearchParams(window.location.search);
   var startN = parseInt(params.get('start') || '1', 10);
   var endN = parseInt(params.get('end') || String(ALL_SLIDES.length), 10);
   var slides = ALL_SLIDES.slice(startN - 1, endN);
+  var SHOW_CAPTION = false;
 
   var idx = 0;
   var mediaEl = document.getElementById('pf-media');
@@ -216,7 +217,7 @@
       img.alt = s.caption || ('포트폴리오 이미지 ' + (idx + 1));
       mediaEl.appendChild(img);
     }
-    capEl.textContent = s.caption || '';
+    capEl.textContent = SHOW_CAPTION ? (s.caption || '') : '';
     noteEl.textContent = s.note || '';
     curEl.textContent = idx + 1;
     totEl.textContent = slides.length;

@@ -221,8 +221,9 @@
 
   // 주소 뒤 ?start=1&end=12 로 보여줄 구간을 정합니다. 없으면 전체를 보여줍니다. true면 캡션 보임, false면 캡션 숨김
   var params = new URLSearchParams(window.location.search);
+  var minId = Math.min.apply(null, ALL_SLIDES.map(function(s){ return s.id; }));
   var maxId = Math.max.apply(null, ALL_SLIDES.map(function(s){ return s.id; }));
-  var startN = parseFloat(params.get('start') || '1000');
+  var startN = parseFloat(params.get('start') || String(minId));
   var endN = parseFloat(params.get('end') || String(maxId));
   var slides = ALL_SLIDES.filter(function(s){ return s.id >= startN && s.id <= endN; });
   var SHOW_CAPTION = false;

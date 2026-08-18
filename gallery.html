@@ -100,10 +100,18 @@
 </div>
 
 <script>
+  // ============================================================
+// 카테고리별로 목록이 완전히 분리되어 있습니다.
+//
+// [이미지 추가하는 법]
+// 해당 카테고리의 [ ] 안, 맨 마지막 항목 뒤에 콤마( , )를 붙이고
+// 새 항목을 추가하면 끝. 다른 카테고리는 전혀 안 건드림.
+//
+// [새 카테고리를 만들고 싶을 때]
+// 아래처럼 "var CATEGORY_4 = [ ... ];" 하나 더 만들고,
+// 맨 아래 CATEGORY_MAP 에도 이름을 추가해주면 됩니다.
 // ============================================================
-// 전체 72장 마스터 목록. 이미지를 바꾸거나 추가/삭제할 땐 여기만 고치면 됩니다.
-// ============================================================
-  var ALL_SLIDES = [
+  var CATEGORY_1 = [
     { gif: "https://lh3.googleusercontent.com/fabgefPaa9Qpd7x_OwC3tsu72S02eiI1UUDfl3GamTCEGkrL51HVhD1bCa4Dk8XYvTiImTPEY0m_M_on5l-b_KDnYNHf-5q7mtGDWk73biUwHD8YZuz0cg=w800", thumb: "https://lh3.googleusercontent.com/fabgefPaa9Qpd7x_OwC3tsu72S02eiI1UUDfl3GamTCEGkrL51HVhD1bCa4Dk8XYvTiImTPEY0m_M_on5l-b_KDnYNHf-5q7mtGDWk73biUwHD8YZuz0cg=w800", caption: "1", note: "2026.6" },
     { gif: "https://lh3.googleusercontent.com/G3kvUp_5SSxhcThGjnY0yovc827w5dkdp-le_vGrvEO8sYlDslOOeGsMm59m5uVQhpE19_HNuPtbDnIhuORpa6vcURQZhCu1k-ArCjI0yUrpgnmZj7EeRw=w800", thumb: "https://lh3.googleusercontent.com/G3kvUp_5SSxhcThGjnY0yovc827w5dkdp-le_vGrvEO8sYlDslOOeGsMm59m5uVQhpE19_HNuPtbDnIhuORpa6vcURQZhCu1k-ArCjI0yUrpgnmZj7EeRw=w800", caption: "2", note: "2026.5" },
     { gif: "https://lh3.googleusercontent.com/iYbb5G83B-3MLRh9pQLvsLlFQUSaA4xLYLBZWtQ9m1FozvoyKAyfSsx8PtSzCZGPI8SZgjqpC2sdWpvkS5JlWKyU9uzCjvHfJX4hZBER14wThNpHGvVuiTk=w800", thumb: "https://lh3.googleusercontent.com/iYbb5G83B-3MLRh9pQLvsLlFQUSaA4xLYLBZWtQ9m1FozvoyKAyfSsx8PtSzCZGPI8SZgjqpC2sdWpvkS5JlWKyU9uzCjvHfJX4hZBER14wThNpHGvVuiTk=w800", caption: "3", note: "2026.4"},
@@ -116,7 +124,10 @@
     { gif: "https://lh3.googleusercontent.com/TVBPRMygbTDLEIKQGucUS1UvWVWrlZncqkE9oWdafWQ1e7fFW51eCxlGOwvku0XYXQtHkdXfjS8DMKAj1noG-zvGJTXxktY6iW1cZ_1gC6s4AIdBSK0jSA=w800", thumb: "https://lh3.googleusercontent.com/TVBPRMygbTDLEIKQGucUS1UvWVWrlZncqkE9oWdafWQ1e7fFW51eCxlGOwvku0XYXQtHkdXfjS8DMKAj1noG-zvGJTXxktY6iW1cZ_1gC6s4AIdBSK0jSA=w800", caption: "10" },
     { gif: "https://lh3.googleusercontent.com/I_7-ukcvcboRce_S3GatmbrSpVqoV1Jolwg75qESJEFaV-tLe0utJx6yvF2rpLvJhbv8upjIPtKNCHXO-Eu0nGN9YkMVUZLSiajyF0YFrzBX6_BfqaNc_g=w800", thumb: "https://lh3.googleusercontent.com/I_7-ukcvcboRce_S3GatmbrSpVqoV1Jolwg75qESJEFaV-tLe0utJx6yvF2rpLvJhbv8upjIPtKNCHXO-Eu0nGN9YkMVUZLSiajyF0YFrzBX6_BfqaNc_g=w800", caption: "11" },
     { gif: "https://lh3.googleusercontent.com/z3VJwRyQZWAu3nh_7u86DLYjQtZLa-J_uYtmI7RjNtYavNYwf1zCogo1IugEU-0CBKRwEJfinkEvbvSsO-e1ZsevEw4YXJpietSXbitugAwepZGDDCCMRA=w800", thumb: "https://lh3.googleusercontent.com/z3VJwRyQZWAu3nh_7u86DLYjQtZLa-J_uYtmI7RjNtYavNYwf1zCogo1IugEU-0CBKRwEJfinkEvbvSsO-e1ZsevEw4YXJpietSXbitugAwepZGDDCCMRA=w800", caption: "12" },
-    { gif: "https://lh3.googleusercontent.com/MGJ47-jdaxL70dewkHeavCAsIjsTJyr1deQu4w6H4cmfO0lYm_Hl0M4-_rwItCHhfJNfpUguX4b1SL9AzzJ9nR5MOw1btaZj-WBfYZYwSFT9dimw_s48-V0=w800", thumb: "https://lh3.googleusercontent.com/MGJ47-jdaxL70dewkHeavCAsIjsTJyr1deQu4w6H4cmfO0lYm_Hl0M4-_rwItCHhfJNfpUguX4b1SL9AzzJ9nR5MOw1btaZj-WBfYZYwSFT9dimw_s48-V0=w800", caption: "13" },
+    { gif: "https://lh3.googleusercontent.com/MGJ47-jdaxL70dewkHeavCAsIjsTJyr1deQu4w6H4cmfO0lYm_Hl0M4-_rwItCHhfJNfpUguX4b1SL9AzzJ9nR5MOw1btaZj-WBfYZYwSFT9dimw_s48-V0=w800", thumb: "https://lh3.googleusercontent.com/MGJ47-jdaxL70dewkHeavCAsIjsTJyr1deQu4w6H4cmfO0lYm_Hl0M4-_rwItCHhfJNfpUguX4b1SL9AzzJ9nR5MOw1btaZj-WBfYZYwSFT9dimw_s48-V0=w800", caption: "13" }
+  ];
+
+  var CATEGORY_2 = [
     { gif: "https://lh3.googleusercontent.com/jzAUa99ci2Uth9KAASswgtlturwIOIHsW505obxH_g4_u_Pd9kvjOgFQ6ZsgP7pTfgSegtApdOjSsQvh5LKh7HXsqbidPlkXA5JpIDIwcLh9_r1NPuB_fA=w800", thumb: "https://lh3.googleusercontent.com/jzAUa99ci2Uth9KAASswgtlturwIOIHsW505obxH_g4_u_Pd9kvjOgFQ6ZsgP7pTfgSegtApdOjSsQvh5LKh7HXsqbidPlkXA5JpIDIwcLh9_r1NPuB_fA=w800", caption: "14", note: "2026.8" },
     { gif: "https://lh3.googleusercontent.com/edJMjCEYpT1uFYFMigr6TkvfungNKWV4idXFB2JJpo9_8_60KuChR6rB8wLdvNhp74mZcPW5mP0PuGoiOlR7CLQDbTf4j0tFMOLJPgAOANLNwWVuTqGngA=w800", thumb: "https://lh3.googleusercontent.com/edJMjCEYpT1uFYFMigr6TkvfungNKWV4idXFB2JJpo9_8_60KuChR6rB8wLdvNhp74mZcPW5mP0PuGoiOlR7CLQDbTf4j0tFMOLJPgAOANLNwWVuTqGngA=w800", caption: "15", note: "2026.8" },
     { gif: "https://lh3.googleusercontent.com/VCfrWJOhSifEDdSqFJTHRmKKgQG0eQKI_oBGvWJ4KA_-6ocYHOtRZ4vxPwP5DIwJIYvHOEs8KXVf4RZsU06gASGQMNyBEeurGlUHTNo2fX5-7Nxr4LY=w800", thumb: "https://lh3.googleusercontent.com/VCfrWJOhSifEDdSqFJTHRmKKgQG0eQKI_oBGvWJ4KA_-6ocYHOtRZ4vxPwP5DIwJIYvHOEs8KXVf4RZsU06gASGQMNyBEeurGlUHTNo2fX5-7Nxr4LY=w800", caption: "16", note: "2026.7" },
@@ -137,7 +148,10 @@
     { gif: "https://lh3.googleusercontent.com/iEKUmnNzLB7kNJV6ihVzfw90EYvHyWXr9zeXBbQLq9sDEtuYbYJz7F6dQn066R6c6MUxTYPN5YGhj3mk7njJ_bFsYTR9n93Ld5vCSywC4njyLPUtt-r3yeg=w800", thumb: "https://lh3.googleusercontent.com/iEKUmnNzLB7kNJV6ihVzfw90EYvHyWXr9zeXBbQLq9sDEtuYbYJz7F6dQn066R6c6MUxTYPN5YGhj3mk7njJ_bFsYTR9n93Ld5vCSywC4njyLPUtt-r3yeg=w800", caption: "31" },
     { gif: "https://lh3.googleusercontent.com/Mt41vNElwqZLaBu_tCFKI81W7yTH4TCT0zOdqJt97gOxyNuGiX27pVsEneQ1Rm9AYI-kv7f1upVOBLfJw_pojlkcpMwel2IxT9V4BcTGTWxZnUsRbvTO0A=w800", thumb: "https://lh3.googleusercontent.com/Mt41vNElwqZLaBu_tCFKI81W7yTH4TCT0zOdqJt97gOxyNuGiX27pVsEneQ1Rm9AYI-kv7f1upVOBLfJw_pojlkcpMwel2IxT9V4BcTGTWxZnUsRbvTO0A=w800", caption: "32" },
     { gif: "https://lh3.googleusercontent.com/SW5lJPJu-HjyajuQohTl700_aRme1Z_0HRGmqtjNnH_nyiCsZQbzG1m0_Wwmfjq58yBR5G261pvGGznaDYstuLuVQMrq9AZLE-4oV9FYzzWLMnePlr-i-Io=w800", thumb: "https://lh3.googleusercontent.com/SW5lJPJu-HjyajuQohTl700_aRme1Z_0HRGmqtjNnH_nyiCsZQbzG1m0_Wwmfjq58yBR5G261pvGGznaDYstuLuVQMrq9AZLE-4oV9FYzzWLMnePlr-i-Io=w800", caption: "33" },
-    { gif: "https://lh3.googleusercontent.com/JjPKK-W5jumWtjcB5wNamSU3sI4aRfLt04K1B4V3Cygt2hIyIAW2uhBZf9pVUs-IZAiv3NkgrrX7j4fwkotB2Fsax7n9PJRqFTqA3jQI_jioUqCDkYXClA=w800", thumb: "https://lh3.googleusercontent.com/JjPKK-W5jumWtjcB5wNamSU3sI4aRfLt04K1B4V3Cygt2hIyIAW2uhBZf9pVUs-IZAiv3NkgrrX7j4fwkotB2Fsax7n9PJRqFTqA3jQI_jioUqCDkYXClA=w800", caption: "34" },
+    { gif: "https://lh3.googleusercontent.com/JjPKK-W5jumWtjcB5wNamSU3sI4aRfLt04K1B4V3Cygt2hIyIAW2uhBZf9pVUs-IZAiv3NkgrrX7j4fwkotB2Fsax7n9PJRqFTqA3jQI_jioUqCDkYXClA=w800", thumb: "https://lh3.googleusercontent.com/JjPKK-W5jumWtjcB5wNamSU3sI4aRfLt04K1B4V3Cygt2hIyIAW2uhBZf9pVUs-IZAiv3NkgrrX7j4fwkotB2Fsax7n9PJRqFTqA3jQI_jioUqCDkYXClA=w800", caption: "34" }
+  ];
+
+  var CATEGORY_3 = [
     { gif: "https://lh3.googleusercontent.com/6psK-XyKdTUjPX-BkR1mMAz0janIlPLypLelhw0UJvm8LJ_Nqt4p2UygMTOtngVAIh9aFtoekQ139Vfw-IS4gHZfdq8IWEKC_fVf7-v9Yap5xuiHfZbi0Q=w800", thumb: "https://lh3.googleusercontent.com/6psK-XyKdTUjPX-BkR1mMAz0janIlPLypLelhw0UJvm8LJ_Nqt4p2UygMTOtngVAIh9aFtoekQ139Vfw-IS4gHZfdq8IWEKC_fVf7-v9Yap5xuiHfZbi0Q=w800", caption: "35" },
     { gif: "https://lh3.googleusercontent.com/0scQ1w3DVQ9bGJc3SmCeYXf92hsxEMQCwktmUOo0Mii4QIq23J5CiTS-YM0yflrYudk0WSUJ9qMprsN6T91glaw8xjiFrunh6QzzJUwGt0jWSibxpZD-Cw=w800", thumb: "https://lh3.googleusercontent.com/0scQ1w3DVQ9bGJc3SmCeYXf92hsxEMQCwktmUOo0Mii4QIq23J5CiTS-YM0yflrYudk0WSUJ9qMprsN6T91glaw8xjiFrunh6QzzJUwGt0jWSibxpZD-Cw=w800", caption: "36" },
     { gif: "https://lh3.googleusercontent.com/USVu-WZMH4fm4SqTRv8X9paOWSMwglsK7MpknsioxV5Cboh5ZS99OMC1d-74b_ezV8AfNpLr0fS-CENgYwnwvguS9wrNvdKMfwlsidnfozCI3IiS2JsVwQ=w800", thumb: "https://lh3.googleusercontent.com/USVu-WZMH4fm4SqTRv8X9paOWSMwglsK7MpknsioxV5Cboh5ZS99OMC1d-74b_ezV8AfNpLr0fS-CENgYwnwvguS9wrNvdKMfwlsidnfozCI3IiS2JsVwQ=w800", caption: "37" },
@@ -180,11 +194,17 @@
     { gif: "https://artmugfile5.cafe24.com/image/up_img/detail/4/goods_44194/17785126260.gif", thumb: "https://artmugfile5.cafe24.com/image/up_img/detail/4/goods_44194/17785126260.gif", caption: "74" }
   ];
 
-  // 주소 뒤 ?start=1&end=12 로 보여줄 구간을 정합니다. 없으면 전체를 보여줍니다. true면 캡션 보임, false면 캡션 숨김
+  // 카테고리 이름 -> 목록 연결. 주소 뒤에 ?cat=1 처럼 붙이면 해당 카테고리만 보여줍니다.
+  var CATEGORY_MAP = {
+    "1": CATEGORY_1,
+    "2": CATEGORY_2,
+    "3": CATEGORY_3
+  };
+
+  // 주소 뒤 ?cat=1 처럼 붙이면 해당 카테고리만 보여줍니다. 없으면 카테고리1을 기본으로 보여줍니다.
   var params = new URLSearchParams(window.location.search);
-  var startN = parseInt(params.get('start') || '1', 10);
-  var endN = parseInt(params.get('end') || String(ALL_SLIDES.length), 10);
-  var slides = ALL_SLIDES.slice(startN - 1, endN);
+  var catKey = params.get('cat') || '1';
+  var slides = CATEGORY_MAP[catKey] || CATEGORY_1;
   var SHOW_CAPTION = false;
 
   var idx = 0;

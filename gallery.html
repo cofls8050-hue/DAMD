@@ -202,9 +202,30 @@
   };
 
   // 주소 뒤 ?cat=1 처럼 붙이면 해당 카테고리만 보여줍니다. 없으면 카테고리1을 기본으로 보여줍니다.
+  //
+  // ★ 예전 방식(?start=1&end=13)으로 된 링크도 계속 작동하도록,
+  //   start 번호가 어느 카테고리에 속하는지 자동으로 찾아서 그 카테고리를 보여줍니다.
+  //   (다른 페이지에 남아있는 예전 링크를 일일이 안 고쳐도 됩니다.)
+  function findCategoryByOldStart(startNum){
+    for (var key in CATEGORY_MAP){
+      var list = CATEGORY_MAP[key];
+      for (var i = 0; i < list.length; i++){
+        if (parseInt(list[i].caption, 10) === startNum) return list;
+      }
+    }
+    return null;
+  }
+
   var params = new URLSearchParams(window.location.search);
-  var catKey = params.get('cat') || '1';
-  var slides = CATEGORY_MAP[catKey] || CATEGORY_1;
+  var catKey = params.get('cat');
+  var slides;
+  if (catKey) {
+    slides = CATEGORY_MAP[catKey] || CATEGORY_1;
+  } else if (params.get('start')) {
+    slides = findCategoryByOldStart(parseInt(params.get('start'), 10)) || CATEGORY_1;
+  } else {
+    slides = CATEGORY_1;
+  }
   var SHOW_CAPTION = false;
 
   var idx = 0;

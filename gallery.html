@@ -81,12 +81,26 @@
     .pf-slider{ padding:12px; }
     .pf-thumb{ width:84px; height:52px; }
   }
-.pf-slider img{
-  -webkit-user-drag:none;
-  user-drag:none;
-  -webkit-touch-callout:none;
-  user-select:none;
-}
+  @media (max-width:520px){
+    .pf-arrow{ width:34px; height:34px; font-size:14px; }
+    .pf-slider{ padding:12px; }
+    .pf-thumb{ width:84px; height:52px; }
+  }
+
+  /* 우클릭/드래그로 이미지 저장 방지 */
+  .pf-image{
+    -webkit-user-drag:none;
+    user-drag:none;
+    -webkit-touch-callout:none;
+    user-select:none;
+    pointer-events:none;
+  }
+  .pf-thumb{
+    -webkit-user-drag:none;
+    user-drag:none;
+    -webkit-touch-callout:none;
+    user-select:none;
+  }
 </style>
 </head>
 <body oncontextmenu="return false;">
